@@ -108,7 +108,9 @@
     top: 50%;
     left: 50%;
     position: absolute;
+    color: #F9E7C0;
     margin: 0;
+    font-size: 60px;
   }
 }
 </style>
