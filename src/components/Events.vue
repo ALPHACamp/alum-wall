@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="full-slide">
-      <wall v-if="scene === 5"/>
+      <wall v-if="scene === 1"/>
       <div v-else>
         <div
           id="background1"

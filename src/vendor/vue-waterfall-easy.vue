@@ -30,8 +30,7 @@
     }
     & > .img-box.default-card-animation {
       animation: show-card 0.4s;
-      transition: left 0.6s, top 0.6s;
-      transition-delay: 0.1s;
+      /*transition-delay: 0.1s;*/
     }
     a {
       display: block;
@@ -372,7 +371,7 @@ export default {
           left,
           top,
           duration: 0.3,
-          ease: 'elastic'
+          ease: 'none'
         })
         // this.imgBoxEls[i].style.transform = `translate(${left})`
         // this.imgBoxEls[i].style.left = left + 'px'
