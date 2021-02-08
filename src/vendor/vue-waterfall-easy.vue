@@ -89,7 +89,7 @@
 
     &.ball-beat > .dot {
       vertical-align: bottom;
-      background-color: #4b15ab;
+      background: #FF6600;
       width: 12px;
       height: 12px;
       border-radius: 50%;
@@ -116,7 +116,7 @@
 <!-- —————————————↓HTML————————分界线———————————————————————— -->
 <template lang="pug">
 .vue-waterfall-easy-container(:style="{width: width&&!isMobile ? width+'px' : '', height: parseFloat(height)==height ? height+'px': height }")
-  .loading.ball-beat(v-show="isPreloading_c", :class="{first:isFirstLoad}")
+  .loading.ball-beat(v-show="isPreloading_c && !loaded", :class="{first:isFirstLoad}")
     slot(name="loading", :isFirstLoad="isFirstLoad")
     .dot(v-if="!hasLoadingSlot", v-for="n in loadingDotCount",:style="loadingDotStyle")
   //- 为了防止loading 跟随滚动
@@ -226,10 +226,11 @@ export default {
     enablePullDownEvent: {
       type: Boolean,
       default: false
-    }
+    },
   },
   data () {
     return {
+      loaded: false,
       msg: 'this is from vue-waterfall-easy.vue',
       isMobile: !!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i), // 初始化移动端
       isPreloading: true, // 正在预加载中，显示加载动画

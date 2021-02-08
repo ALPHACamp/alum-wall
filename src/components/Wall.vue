@@ -129,7 +129,8 @@ export default {
     },
     outerStyles () {
       const array = this.imagesArr.map(user => {
-        let color = this.tagsData[user[5]].color
+        const klass = this.tagsData[user[5]]
+        let color = klass ? this.tagsData[user[5]].color : '#F9E7C0'
 
         return {
           border: `2px solid ${color}`,
@@ -244,7 +245,7 @@ export default {
       }
 
       setTimeout(() => {
-        this.$refs.waterfall.isPreloading_c = false
+        this.$refs.waterfall.loaded = true
       }, 3000)
     },
     openLink (link) {
