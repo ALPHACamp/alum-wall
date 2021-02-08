@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <events v-if="response_id" class="main"/>
-    <div v-else class="typeform" />
+    <events v-show="response_id" class="main"/>
+    <div v-show="!response_id" class="typeform" />
   </div>
 </template>
 

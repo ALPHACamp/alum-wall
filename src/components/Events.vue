@@ -84,6 +84,7 @@
           :style="color"
           src="svgs/arrow-left.svg"
           @click="clickPrev"
+          @keydown.left="clickPrev"
         >
 
         <img
@@ -92,6 +93,7 @@
           :style="color"
           src="svgs/arrow-right.svg"
           @click="clickNext"
+          @keydown.right="clickNext"
         >
       </div>
     </transition>
