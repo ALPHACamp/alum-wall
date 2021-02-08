@@ -4,6 +4,9 @@ module.exports = {
   devServer: {
     https: true
   },
+  css: {
+    extract: false
+  },
   chainWebpack: config => {
     config.resolve.alias
       .set('icons', path.resolve(__dirname, 'src/assets/icons'))
