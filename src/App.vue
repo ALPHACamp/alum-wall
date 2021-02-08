@@ -15,7 +15,7 @@ export default {
   },
   data () {
     return {
-      response_id: 123
+      response_id: null
     }
   },
   created () {

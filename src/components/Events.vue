@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="full-slide">
-      <wall v-if="scene === 1"/>
+      <wall v-if="scene === 5"/>
       <div v-else>
         <div
           id="background1"
@@ -155,6 +155,7 @@ export default {
       .from('.right', { opacity: 0, xPercent: '-10' }, 1)
 
     this.tl2 = gsap.timeline({ paused: true })
+      .addPause(0)
       .to('#animate', { rotate: 180, ease: 'none' }, 0)
       .to(`#background1`, { opacity: 0 }, 0.5)
       .to(`#background2`, { opacity: 1 }, 0.5)
@@ -182,7 +183,6 @@ export default {
       .to(`#logo-text4`, { opacity: 1 }, 2.5)
       .addPause(3)
 
-    window.tl2 = this.tl2
   },
   methods: {
     clickPrev () {
