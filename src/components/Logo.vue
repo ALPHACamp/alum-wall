@@ -28,10 +28,10 @@ export default {
 
 <style scoped lang="scss">
   svg {
-    width: 500px;
+    width: calc(250px + 6 * ((100vw - 120px) / 40));
   }
   h1  {
-    font-size: 100px;
+    font-size: calc(50px + 6 * ((100vw - 120px) / 200));
     font-style: normal;
     font-weight: 900;
     line-height: 50px;

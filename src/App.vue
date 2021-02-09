@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <events v-show="response_id" class="main"/>
-    <div v-show="!response_id" class="typeform" />
+    <div v-if="!response_id" class="typeform" />
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   },
   data () {
     return {
-      response_id: 123
+      response_id: null
     }
   },
   created () {
@@ -25,11 +25,15 @@ export default {
         , "https://ac-bootcamp.typeform.com/to/mNNpUGgw", {
         hideFooter: true,
         hideHeaders: true,
-        onSubmit: async (event) => {
-          this.response_id = event.response_id
-        }
+        onSubmit: this.submit
       })
     })
+  },
+  methods: {
+    async submit(event) {
+      this.response_id = event.response_id
+      document.querySelector('[data-qa="mobile-modal"]').style.visibility = 'hidden'
+    }
   }
 }
 </script>
@@ -57,4 +61,7 @@ export default {
   :focus {
     outline: none;
   }
+.hide-typeform [data-qa="mobile-modal"]{
+  display: none;
+}
 </style>
