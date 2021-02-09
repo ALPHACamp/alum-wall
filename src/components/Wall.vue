@@ -153,11 +153,11 @@ export default {
             return this.activeTag === user[5]
           }
         }).map(user => {
-          const result = /\((.+)\)/.exec(user[2])
+          const result = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.exec(user[2])
           return {
             ...user,
-            src: result ? result[1] : '',
-            href: result ? result[1] : ''
+            src: result ? result[0] : '',
+            href: result ? result[0] : ''
           }
         })
     },
