@@ -71,9 +71,9 @@
             id="animate2"
             class="bgc-image"
             :style="{
-          background: `url(${require('images/1.jpg')})`,
-          transform: 'translate(-50%, -50%)'
-        }"
+              background: `url(${require('images/1.jpg')})`,
+              transform: 'translate(-50%, -50%)'
+            }"
           />
         </div>
 
@@ -142,13 +142,13 @@ export default {
   },
   mounted () {
     this.tl = gsap.timeline()
-
-    this.tl.to('#animate', { width: '10vh', height: '10vh', duration: 0.5, ease: 'ease.in' }, 0)
-      .to('#animate2', { left: '5vh', top: '5vh', duration: 0.5, ease: 'ease.in' }, 0)
-      .to('#animate', { width: '88vh', duration: 0.3 }, 0.4)
-      .to('#animate2', { left: '44vh', duration: 0.3, ease: 'ease.in' }, 0.4)
-      .to('#animate', { height: '88vh', duration: 0.4, ease: 'ease.out' }, 0.75)
-      .to('#animate2', { top: '44vh', duration: 0.4, ease: 'ease.out' }, 0.75)
+    const unit = window.innerHeight > window.innerWidth ? 'vw' : 'vh'
+    this.tl.to('#animate', { width: `10${unit}`, height: `10${unit}`, duration: 0.5, ease: 'ease.in' }, 0)
+      .to('#animate2', { left: `5${unit}`, top: `5${unit}`, duration: 0.5, ease: 'ease.in' }, 0)
+      .to('#animate', { width: `88${unit}`, duration: 0.3 }, 0.4)
+      .to('#animate2', { left: `44${unit}`, duration: 0.3, ease: 'ease.in' }, 0.4)
+      .to('#animate', { height: `88${unit}`, duration: 0.4, ease: 'ease.out' }, 0.75)
+      .to('#animate2', { top: `44${unit}`, duration: 0.4, ease: 'ease.out' }, 0.75)
       .to('#animate3', {
         background: 'rgba(0,0,0,0)',
         duration: 1.5,
@@ -161,8 +161,8 @@ export default {
       .to('#animate', { rotate: 180, ease: 'none' }, 0)
       .to(`#background1`, { opacity: 0 }, 0.5)
       .to(`#background2`, { opacity: 1 }, 0.5)
-      .to(`#logo-icon1`, { y: '-50vh' }, 0.5)
-      .to(`#logo-text1`, { y: '50vh' }, 0.5)
+      .to(`#logo-icon1`, { y: `90${unit}` }, 0.5)
+      .to(`#logo-text1`, { y: `90${unit}` }, 0.5)
       .to(`#logo-icon2`, { opacity: 1 }, 0.5)
       .to(`#logo-text2`, { opacity: 1 }, 0.5)
       .addPause(1)
@@ -170,8 +170,8 @@ export default {
       .to('#animate', { rotate: 360, ease: 'none' }, 1)
       .to(`#background2`, { opacity: 0 }, 1.5)
       .to(`#background3`, { opacity: 1 }, 1.5)
-      .to(`#logo-icon2`, { y: '-50vh' }, 1.5)
-      .to(`#logo-text2`, { y: '50vh' }, 1.5)
+      .to(`#logo-icon2`, { y: `90${unit}` }, 1.5)
+      .to(`#logo-text2`, { y: `90${unit}` }, 1.5)
       .to(`#logo-icon3`, { opacity: 1 }, 1.5)
       .to(`#logo-text3`, { opacity: 1 }, 1.5)
       .addPause(2)
@@ -179,8 +179,8 @@ export default {
       .to('#animate', { rotate: 540, ease: 'none' }, 2)
       .to(`#background3`, { opacity: 0 }, 2.5)
       .to(`#background4`, { opacity: 1 }, 2.5)
-      .to(`#logo-icon3`, { y: '-50vh' }, 2.5)
-      .to(`#logo-text3`, { y: '50vh' }, 2.5)
+      .to(`#logo-icon3`, { y: `90${unit}` }, 2.5)
+      .to(`#logo-text3`, { y: `90${unit}` }, 2.5)
       .to(`#logo-icon4`, { opacity: 1 }, 2.5)
       .to(`#logo-text4`, { opacity: 1 }, 2.5)
       .addPause(3)
@@ -256,7 +256,7 @@ export default {
     color: #F9E7C0;
     transform: translateY(-50%);
     transition: background-color 0.5s;
-
+    z-index: 10;
     &:hover {
       background: rgba(0, 0, 0, 0.2);
     }
@@ -265,13 +265,13 @@ export default {
   .logo {
     overflow: hidden;
     .logo-icon {
-      width: 500px;
+      width: calc(250px + 6 * ((100vw - 120px) / 40));
       transition: fill 0.3s;
     }
 
     .logo-text {
       transition: color 0.3s;
-      font-size: 100px;
+      font-size: calc(50px + 6 * ((100vw - 120px) / 200));
       font-style: normal;
       font-weight: 900;
       line-height: 50px;
@@ -282,7 +282,10 @@ export default {
   }
   .logo-title {
     opacity: 0;
-    font-size: 120px;
+    font-size: calc(50px + 6 * ((100vw - 120px) / 140));
+  }
+  #logo-text4 {
+    font-size: calc(35px + 6 * ((100vw - 120px) / 200));
   }
   #logo-text2, #logo-text3, #logo-text4 {
     font-size: 50px;

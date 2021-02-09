@@ -54,24 +54,28 @@
               <img
                 v-if="props.value[1]"
                 svg-inline
+                :style="{ fill: outerStyles[props.index].color }"
                 src="svgs/email.svg"
                 @click="openLink(`mailto:${props.value[1]}`)"
               >
               <img
                 v-if="props.value[9]"
                 svg-inline
+                :style="{ fill: outerStyles[props.index].color }"
                 src="svgs/facebook.svg"
                 @click="openLink(props.value[9])"
               >
               <img
                 v-if="props.value[8]"
                 svg-inline
+                :style="{ fill: outerStyles[props.index].color }"
                 src="svgs/line.svg"
                 @click="openLink(`https://line.me/R/ti/p/${props.value[8]}`)"
               >
               <img
                 v-if="props.value[10]"
                 svg-inline
+                :style="{ fill: outerStyles[props.index].color }"
                 src="svgs/linkdin.svg"
                 @click="openLink(props.value[10])"
               >
@@ -83,7 +87,7 @@
             </span>
         </div>
 
-        <div class="info-bottom" :style="{ borderTop: `1px solid ${currentTag.color}` }">
+        <div class="info-bottom" :style="{ borderTop: `1px solid ${outerStyles[props.index].color}` }">
           <span class="fz10">
             {{ props.value[5] }}
           </span>
@@ -260,7 +264,6 @@ export default {
   ::v-deep.icons svg{
     width: 20px;
     margin-right: 5px;
-    fill: #F7A937;
     opacity: 0.5;
     cursor: pointer;
     transition: opacity 0.3s;
