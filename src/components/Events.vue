@@ -143,18 +143,18 @@ export default {
   mounted () {
     this.tl = gsap.timeline()
     const unit = window.innerHeight > window.innerWidth ? 'vw' : 'vh'
-    this.tl.to('#animate', { width: `10${unit}`, height: `10${unit}`, duration: 0.5, ease: 'ease.in' }, 0)
-      .to('#animate2', { left: `5${unit}`, top: `5${unit}`, duration: 0.5, ease: 'ease.in' }, 0)
-      .to('#animate', { width: `88${unit}`, duration: 0.3 }, 0.4)
-      .to('#animate2', { left: `44${unit}`, duration: 0.3, ease: 'ease.in' }, 0.4)
-      .to('#animate', { height: `88${unit}`, duration: 0.4, ease: 'ease.out' }, 0.75)
-      .to('#animate2', { top: `44${unit}`, duration: 0.4, ease: 'ease.out' }, 0.75)
+    this.tl.to('#animate', { width: `10${unit}`, height: `10${unit}`, duration: 0.5, ease: 'ease.in' }, 1)
+      .to('#animate2', { left: `5${unit}`, top: `5${unit}`, duration: 0.5, ease: 'ease.in' }, 1)
+      .to('#animate', { width: `88${unit}`, duration: 0.3 }, 1.4)
+      .to('#animate2', { left: `44${unit}`, duration: 0.3, ease: 'ease.in' }, 1.4)
+      .to('#animate', { height: `88${unit}`, duration: 0.4, ease: 'ease.out' }, 1.75)
+      .to('#animate2', { top: `44${unit}`, duration: 0.4, ease: 'ease.out' }, 1.75)
       .to('#animate3', {
         background: 'rgba(0,0,0,0)',
         duration: 1.5,
         ease: 'ease.in'
-      }, 0.5)
-      .from('.right', { opacity: 0, xPercent: '-10' }, 1)
+      }, 1.5)
+      .from('.right', { opacity: 0, xPercent: '-10' }, 2)
 
     this.tl2 = gsap.timeline({ paused: true })
       .addPause(0)

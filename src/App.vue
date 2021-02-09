@@ -19,6 +19,7 @@ export default {
     }
   },
   created () {
+    console.log('version 1.1.0')
     window.addEventListener("DOMContentLoaded", () => {
       window.typeformEmbed.makeWidget(
         document.querySelector('.typeform')
