@@ -1,29 +1,13 @@
 <template>
   <div>
     <transition name="full-slide">
-      <wall v-if="scene === 5"/>
+      <wall v-if="scene === 2"/>
       <div v-else>
         <div
           id="background1"
           class="bgc-image"
           :style="{ background: `url(${require('images/1.jpg')})` }"
         />
-        <div
-          id="background2"
-          class="bgc-image"
-          :style="{ background: `url(${require('images/2.jpg')})`, opacity: 0 }"
-        />
-        <div
-          id="background3"
-          class="bgc-image"
-          :style="{ background: `url(${require('images/3.jpg')})`, opacity: 0 }"
-        />
-        <div
-          id="background4"
-          class="bgc-image"
-          :style="{ background: `url(${require('images/4.jpg')})`, opacity: 0 }"
-        />
-
         <div
           id="animate3"
           class="bgc-image"
@@ -44,27 +28,6 @@
           </h1>
         </div>
 
-        <div class="logo" :style="color">
-          <h1 id="logo-icon2" class="logo-title">2021 春酒</h1>
-          <h1 id="logo-text2" class="logo-text" :style="color">
-            COMING SOON
-          </h1>
-        </div>
-
-        <div class="logo" :style="color">
-          <h1 id="logo-icon3" class="logo-title">AC 充電站</h1>
-          <h1 id="logo-text3" class="logo-text" :style="color">
-            2020
-          </h1>
-        </div>
-
-        <div class="logo" :style="color">
-          <h1 id="logo-icon4" class="logo-title">Homecoming <br> Party</h1>
-          <h1 id="logo-text4" class="logo-text" :style="color">
-            2019
-          </h1>
-        </div>
-
         <div id="animate" :style="color">
           <div
             v-if="firstTime"
@@ -76,25 +39,6 @@
             }"
           />
         </div>
-
-        <img
-          v-if="scene !== 1"
-          class="left"
-          svg-inline
-          :style="color"
-          src="svgs/arrow-left.svg"
-          @click="clickPrev"
-          @keydown.left="clickPrev"
-        >
-
-        <img
-          class="right"
-          svg-inline
-          :style="color"
-          src="svgs/arrow-right.svg"
-          @click="clickNext"
-          @keydown.right="clickNext"
-        >
       </div>
     </transition>
   </div>
@@ -140,65 +84,27 @@ export default {
       return { fill: color, color, borderColor: color }
     }
   },
-  mounted () {
-    this.tl = gsap.timeline()
-    const unit = window.innerHeight > window.innerWidth ? 'vw' : 'vh'
-    this.tl.to('#animate', { width: `10${unit}`, height: `10${unit}`, duration: 0.5, ease: 'ease.in' }, 1)
-      .to('#animate2', { left: `5${unit}`, top: `5${unit}`, duration: 0.5, ease: 'ease.in' }, 1)
-      .to('#animate', { width: `88${unit}`, duration: 0.3 }, 1.4)
-      .to('#animate2', { left: `44${unit}`, duration: 0.3, ease: 'ease.in' }, 1.4)
-      .to('#animate', { height: `88${unit}`, duration: 0.4, ease: 'ease.out' }, 1.75)
-      .to('#animate2', { top: `44${unit}`, duration: 0.4, ease: 'ease.out' }, 1.75)
-      .to('#animate3', {
-        background: 'rgba(0,0,0,0)',
-        duration: 1.5,
-        ease: 'ease.in'
-      }, 1.5)
-      .from('.right', { opacity: 0, xPercent: '-10' }, 2)
-
-    this.tl2 = gsap.timeline({ paused: true })
-      .addPause(0)
-      .to('#animate', { rotate: 180, ease: 'none' }, 0)
-      .to(`#background1`, { opacity: 0 }, 0.5)
-      .to(`#background2`, { opacity: 1 }, 0.5)
-      .to(`#logo-icon1`, { y: `90${unit}` }, 0.5)
-      .to(`#logo-text1`, { y: `90${unit}` }, 0.5)
-      .to(`#logo-icon2`, { opacity: 1 }, 0.5)
-      .to(`#logo-text2`, { opacity: 1 }, 0.5)
-      .addPause(1)
-
-      .to('#animate', { rotate: 360, ease: 'none' }, 1)
-      .to(`#background2`, { opacity: 0 }, 1.5)
-      .to(`#background3`, { opacity: 1 }, 1.5)
-      .to(`#logo-icon2`, { y: `90${unit}` }, 1.5)
-      .to(`#logo-text2`, { y: `90${unit}` }, 1.5)
-      .to(`#logo-icon3`, { opacity: 1 }, 1.5)
-      .to(`#logo-text3`, { opacity: 1 }, 1.5)
-      .addPause(2)
-
-      .to('#animate', { rotate: 540, ease: 'none' }, 2)
-      .to(`#background3`, { opacity: 0 }, 2.5)
-      .to(`#background4`, { opacity: 1 }, 2.5)
-      .to(`#logo-icon3`, { y: `90${unit}` }, 2.5)
-      .to(`#logo-text3`, { y: `90${unit}` }, 2.5)
-      .to(`#logo-icon4`, { opacity: 1 }, 2.5)
-      .to(`#logo-text4`, { opacity: 1 }, 2.5)
-      .addPause(3)
-
-  },
   methods: {
-    clickPrev () {
-      if (this.tl2.paused()) {
-        this.scene--
-        this.tl2.reverse()
-      }
-    },
-    clickNext () {
-      if (this.tl2.paused()) {
-        this.tl2.play()
-        this.scene++
-        this.firstTime = false
-      }
+    action() {
+      this.$nextTick(() => {
+        this.tl = gsap.timeline()
+        const unit = window.innerHeight > window.innerWidth ? 'vw' : 'vh'
+
+        this.tl.to('#animate', { width: `10${unit}`, height: `10${unit}`, duration: 0.5, ease: 'ease.in' }, 0)
+            .to('#animate2', { left: `5${unit}`, top: `5${unit}`, duration: 0.5, ease: 'ease.in' }, 0)
+            .to('#animate', { width: `88${unit}`, duration: 0.3 }, 0.4)
+            .to('#animate2', { left: `44${unit}`, duration: 0.3, ease: 'ease.in' }, 0.4)
+            .to('#animate', { height: `88${unit}`, duration: 0.4, ease: 'ease.out' }, 0.75)
+            .to('#animate2', { top: `44${unit}`, duration: 0.4, ease: 'ease.out' }, 0.75)
+            .to('#animate3', {
+              background: 'rgba(0,0,0,0)',
+              duration: 0.8,
+              ease: 'ease.in'
+            }, 0.5)
+            .eventCallback('onComplete', () => {
+              this.scene = 2
+            })
+      })
     }
   }
 }
@@ -298,7 +204,7 @@ export default {
   }
   .full-slide-enter-active,
   .full-slide-leave-active {
-    transition: opacity 0.5s, transform 0.5s;
+    transition: opacity 0.7s, ease-out, transform 0.7s, ease-out;
   }
 
 </style>

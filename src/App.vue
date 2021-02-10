@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <events v-show="response_id" class="main"/>
-    <div v-if="!response_id" class="typeform" />
+    <events ref="event"  class="main" />
+    <div v-if="!response_id" class="typeform" :style="{ zIndex: response_id ? 0 : 2 }"/>
   </div>
 </template>
 
@@ -18,22 +18,35 @@ export default {
       response_id: null
     }
   },
-  created () {
-    console.log('version 1.1.0')
-    window.addEventListener("DOMContentLoaded", () => {
-      window.typeformEmbed.makeWidget(
-        document.querySelector('.typeform')
-        , "https://ac-bootcamp.typeform.com/to/mNNpUGgw", {
-        hideFooter: true,
-        hideHeaders: true,
-        onSubmit: this.submit
+  mounted () {
+    console.log('version 1.6.1')
+
+    if (window.location.pathname === '/wall') {
+      this.response_id = 123
+      setTimeout(() => {
+        this.$refs.event.action()
+      }, 500)
+    } else {
+      window.addEventListener("DOMContentLoaded", () => {
+        window.typeformEmbed.makeWidget(
+          document.querySelector('.typeform')
+          , "https://ac-bootcamp.typeform.com/to/mNNpUGgw", {
+            hideFooter: true,
+            hideHeaders: true,
+            onSubmit: this.submit
+          })
       })
-    })
+    }
   },
   methods: {
     async submit(event) {
-      this.response_id = event.response_id
-      document.querySelector('[data-qa="mobile-modal"]').style.visibility = 'hidden'
+      setTimeout(() => {
+        this.response_id = event.response_id
+        if (document.querySelector('[data-qa="mobile-modal"]')) {
+          document.querySelector('[data-qa="mobile-modal"]').style.visibility = 'hidden'
+        }
+        this.$refs.event.action()
+      }, 1000)
     }
   }
 }
@@ -50,10 +63,7 @@ export default {
   width: 100vw;
   background: #2F3035;
 }
-.typeform, .main {
-  z-index: 1;
-}
-  .typeform {
+  .typeform, .main {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -61,6 +71,9 @@ export default {
   }
   :focus {
     outline: none;
+  }
+  .main {
+    z-index: 1;
   }
 .hide-typeform [data-qa="mobile-modal"]{
   display: none;

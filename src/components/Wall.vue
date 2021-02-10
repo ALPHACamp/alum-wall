@@ -66,13 +66,6 @@
                 @click="openLink(props.value[9])"
               >
               <img
-                v-if="props.value[8]"
-                svg-inline
-                :style="{ fill: outerStyles[props.index].color }"
-                src="svgs/line.svg"
-                @click="openLink(`https://line.me/R/ti/p/${props.value[8]}`)"
-              >
-              <img
                 v-if="props.value[10]"
                 svg-inline
                 :style="{ fill: outerStyles[props.index].color }"
@@ -90,9 +83,6 @@
         <div class="info-bottom" :style="{ borderTop: `1px solid ${outerStyles[props.index].color}` }">
           <span class="fz10">
             {{ props.value[5] }}
-          </span>
-          <span class="fz10">
-            {{ props.value[6] }}
           </span>
         </div>
       </div>
@@ -150,7 +140,8 @@ export default {
           if (this.activeTag === 'ALL') {
             return true
           } else {
-            return this.activeTag === user[5]
+            const tags = user[5].split(',')
+            return tags.includes(this.activeTag)
           }
         }).map(user => {
           const result = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.exec(user[2])
@@ -170,13 +161,9 @@ export default {
           key: 'ALL',
           color: '#F9E7C0'
         },
-        'Full Stack Web Development': {
-          key: 'Full Stack Web Development',
+        'Web Development': {
+          key: 'Web Development',
           color: '#F44D71'
-        },
-        'Web Front-end': {
-          key: 'Web Front-end',
-          color: '#6A95A6'
         },
         'Digital Marketing': {
           key: 'Digital Marketing',
@@ -186,17 +173,9 @@ export default {
           key: 'iOS Development',
           color: '#04BF7B'
         },
-        'Product UI/UX Design': {
-          key: 'Product UI/UX Design',
+        'Product Design': {
+          key: 'Product Design',
           color: '#4393D9'
-        },
-        '大航道全端網路開發': {
-          key: '大航道全端網路開發',
-          color: '#D9AE79'
-        },
-        'Web app 全端網路開發課程': {
-          key: 'Web app 全端網路開發課程',
-          color: '#FF6600'
         }
       }
     },
