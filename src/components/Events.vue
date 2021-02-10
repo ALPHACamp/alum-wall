@@ -29,15 +29,15 @@
         </div>
 
         <div id="animate" :style="color">
-          <div
-            v-if="firstTime"
-            id="animate2"
-            class="bgc-image"
-            :style="{
-              background: `url(${require('images/1.jpg')})`,
-              transform: 'translate(-50%, -50%)'
-            }"
-          />
+<!--          <div-->
+<!--            v-if="!isSafari"-->
+<!--            id="animate2"-->
+<!--            class="bgc-image"-->
+<!--            :style="{-->
+<!--              background: `url(${require('images/1.jpg')})`,-->
+<!--              transform: 'translate(-50%, -50%)'-->
+<!--            }"-->
+<!--          />-->
         </div>
       </div>
     </transition>
@@ -58,7 +58,7 @@ export default {
   },
   data () {
     return {
-      firstTime: true,
+      isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
       tl: null,
       tl2: null,
       scene: 1
@@ -88,17 +88,23 @@ export default {
     action() {
       this.$nextTick(() => {
         this.tl = gsap.timeline()
-        const unit = window.innerHeight > window.innerWidth ? 'vw' : 'vh'
+        let unit
+        let px
+        if (window.innerHeight > window.innerWidth) {
+          px = window.innerWidth/ 100
+        } else {
+          px = window.innerHeight/ 100
+        }
 
-        this.tl.to('#animate', { width: `10${unit}`, height: `10${unit}`, duration: 0.5, ease: 'ease.in' }, 0)
-            .to('#animate2', { left: `5${unit}`, top: `5${unit}`, duration: 0.5, ease: 'ease.in' }, 0)
-            .to('#animate', { width: `88${unit}`, duration: 0.3 }, 0.4)
-            .to('#animate2', { left: `44${unit}`, duration: 0.3, ease: 'ease.in' }, 0.4)
-            .to('#animate', { height: `88${unit}`, duration: 0.4, ease: 'ease.out' }, 0.75)
-            .to('#animate2', { top: `44${unit}`, duration: 0.4, ease: 'ease.out' }, 0.75)
+        this.tl.to('#animate', { width: `${10 * px}px`, height: `${10 * px}px`, duration: 0.5, ease: 'ease.in' }, 0)
+            .to('#animate2', { left: `${5 * px}px`, top: `${5 * px}px`, duration: 0.5, ease: 'ease.in' }, 0)
+            .to('#animate', { width: `${88 * px}px`, duration: 0.5 }, 0.4)
+            .to('#animate2', { left: `${44 * px}px`, duration: 0.5, ease: 'ease.in' }, 0.4)
+            .to('#animate', { height: `${88 * px}px`, duration: 0.6, ease: 'ease.out' }, 0.75)
+            .to('#animate2', { top: `${44 * px}px`, duration: 0.6, ease: 'ease.out' }, 0.75)
             .to('#animate3', {
               background: 'rgba(0,0,0,0)',
-              duration: 0.8,
+              duration: 1.5,
               ease: 'ease.in'
             }, 0.5)
             .eventCallback('onComplete', () => {

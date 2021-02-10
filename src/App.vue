@@ -15,16 +15,23 @@ export default {
   },
   data () {
     return {
-      response_id: null
+      response_id: null,
+      loaded: false
     }
   },
   mounted () {
     console.log('version 1.6.1')
 
     if (window.location.pathname === '/wall') {
-      this.response_id = 123
+
       setTimeout(() => {
-        this.$refs.event.action()
+        this.response_id = 123
+        const image = new Image()
+        image.onload = () => {
+          this.$refs.event.action()
+          this.loaded = true
+        }
+        image.src = require('images/1.jpg')
       }, 500)
     } else {
       window.addEventListener("DOMContentLoaded", () => {

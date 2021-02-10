@@ -140,8 +140,7 @@ export default {
           if (this.activeTag === 'ALL') {
             return true
           } else {
-            const tags = user[5].split(',')
-            return tags.includes(this.activeTag)
+            return user[5].includes(this.activeTag)
           }
         }).map(user => {
           const result = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.exec(user[2])
@@ -268,8 +267,16 @@ export default {
     padding: 3%;
     flex: 1;
     margin: 0 auto;
-    width: 80%;
+    width: 95%;
     text-align: center;
+  }
+  @media (max-width:991px) {
+    .tags{
+      margin-top: 50px;
+    }
+    .cards {
+      padding-bottom: 50px;
+    }
   }
   .card {
     text-align: left;
