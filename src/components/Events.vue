@@ -305,9 +305,9 @@ export default {
         this.tl = gsap.timeline()
         let px
         if (window.innerHeight > window.innerWidth) {
-          px = window.innerWidth/ 100
+          px = window.innerWidth / 100
         } else {
-          px = window.innerHeight/ 100
+          px = window.innerHeight / 100
         }
 
         this.tl.to('#animate', { width: `${10 * px}px`, height: `${10 * px}px`, duration: 0.5, ease: 'ease.in' }, 0)
@@ -324,7 +324,8 @@ export default {
             .eventCallback('onComplete', () => {
               this.scene = 2
             })
-            .to('.event', { xPercent: -100 , duration: 0.6, ease: 'ease.out' }, 2)
+            .to('.event', { xPercent: -100 , duration: 0.8, ease: 'ease.outIn' }, 2)
+            // .from('.wall', { xPercent: -100 , duration: 0.8, ease: 'ease.out' }, 2)
       })
     }
   }

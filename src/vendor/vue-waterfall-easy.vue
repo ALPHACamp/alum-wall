@@ -371,15 +371,15 @@ export default {
           this.colsHeightArr[minIndex] = minHeight + height
         }
 
-        gsap.to(this.imgBoxEls[i], {
-          left,
-          top,
-          duration: this.firstTime ? 0 : 0.3,
-          ease: 'none'
-        })
-        // this.imgBoxEls[i].style.transform = `translate(${left})`
-        // this.imgBoxEls[i].style.left = left + 'px'
-        // this.imgBoxEls[i].style.top = top + 'px'
+        // gsap.to(this.imgBoxEls[i], {
+        //   left,
+        //   top,
+        //   duration: this.firstTime ? 0 : 0.3,
+        //   ease: 'none'
+        // })
+        // this.imgBoxEls[i].style.transform = `translate(${left}px, ${top}px)`
+        this.imgBoxEls[i].style.left = left + 'px'
+        this.imgBoxEls[i].style.top = top + 'px'
       }
       this.firstTime = false
       this.beginIndex = this.imgsArr.length // 排列完之后，新增图片从这个索引开始预加载图片和排列
