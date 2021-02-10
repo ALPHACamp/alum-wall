@@ -246,7 +246,8 @@ export default {
       // 自定义loading
       LoadingTimer: null,
       isFirstLoad: true, // 首次加载
-      over: false // 结束waterfall加载
+      over: false, // 结束waterfall加载,
+      firstTime: true
     }
   },
   computed: {
@@ -373,14 +374,14 @@ export default {
         gsap.to(this.imgBoxEls[i], {
           left,
           top,
-          duration: 0.3,
+          duration: this.firstTime ? 0 : 0.3,
           ease: 'none'
         })
         // this.imgBoxEls[i].style.transform = `translate(${left})`
         // this.imgBoxEls[i].style.left = left + 'px'
         // this.imgBoxEls[i].style.top = top + 'px'
       }
-
+      this.firstTime = false
       this.beginIndex = this.imgsArr.length // 排列完之后，新增图片从这个索引开始预加载图片和排列
     },
 
