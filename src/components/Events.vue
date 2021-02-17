@@ -155,9 +155,6 @@ export default {
       userData: []
     }
   },
-  created() {
-    this.getData()
-  },
   computed: {
     shortNames() {
       return this.imagesArr.map(user => {

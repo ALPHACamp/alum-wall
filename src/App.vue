@@ -20,11 +20,12 @@ export default {
     }
   },
   mounted () {
-    console.log('version 1.6.1')
+    console.log('version 1.6.2')
 
     if (window.location.pathname === '/wall') {
 
       setTimeout(() => {
+        this.$refs.event.getData()
         this.response_id = 123
         const image = new Image()
         image.onload = () => {
@@ -52,6 +53,8 @@ export default {
         if (document.querySelector('[data-qa="mobile-modal"]')) {
           document.querySelector('[data-qa="mobile-modal"]').style.visibility = 'hidden'
         }
+
+        this.$refs.event.getData()
         this.$refs.event.action()
       }, 1500)
     }
