@@ -267,8 +267,8 @@ export default {
       return {
         "type": "service_account",
         "project_id": "pagihub",
-        "private_key_id": process.env.PRIVATE_KEY_ID,
-        "private_key": process.env.PRIVATE_KEY,
+        "private_key_id": process.env.VUE_APP_PRIVATE_KEY_ID,
+        "private_key": process.env.VUE_APP_PRIVATE_KEY,
         "client_email": "ac2-135@pagihub.iam.gserviceaccount.com",
         "client_id": "110224692483501250114",
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
@@ -295,8 +295,7 @@ export default {
     },
 
     async getData () {
-      const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID)
-
+      const doc = new GoogleSpreadsheet(process.env.VUE_APP_GOOGLE_SHEET_ID)
       await doc.useServiceAccountAuth(this.key)
       await doc.loadInfo()
       const sheet = doc.sheetsById['903644344']
