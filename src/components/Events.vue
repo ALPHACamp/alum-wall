@@ -135,7 +135,6 @@
 import Logo from './Logo'
 import gsap from 'gsap'
 import { GoogleSpreadsheet } from "google-spreadsheet"
-import credentials from "../../credentials"
 import VueWaterfallEasy from "../vendor/vue-waterfall-easy"
 
 window.gsap = gsap
@@ -263,6 +262,20 @@ export default {
           break
       }
       return { fill: color, color, borderColor: color }
+    },
+    key() {
+      return {
+        "type": "service_account",
+        "project_id": "pagihub",
+        "private_key_id": process.env.PRIVATE_KEY_ID,
+        "private_key": process.env.PRIVATE_KEY,
+        "client_email": "ac-100@pagihub.iam.gserviceaccount.com",
+        "client_id": "104215955696893244547",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ac-100%40pagihub.iam.gserviceaccount.com"
+      }
     }
   },
   methods: {
@@ -280,10 +293,11 @@ export default {
       }
       return `rgba(${object.r}, ${object.g}, ${object.b}, ${opacity})`
     },
-    async getData () {
-      const doc = new GoogleSpreadsheet('1cI5oMVRVFMWxqXrE5Mz0ofh0F4bZWsDL6qOUt_cL22g')
 
-      await doc.useServiceAccountAuth(credentials)
+    async getData () {
+      const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID)
+
+      await doc.useServiceAccountAuth(this.key)
       await doc.loadInfo()
       const sheet = doc.sheetsById['903644344']
       const rows = await sheet.getRows()
