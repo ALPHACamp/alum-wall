@@ -269,12 +269,12 @@ export default {
         "project_id": "pagihub",
         "private_key_id": process.env.PRIVATE_KEY_ID,
         "private_key": process.env.PRIVATE_KEY,
-        "client_email": "ac-100@pagihub.iam.gserviceaccount.com",
-        "client_id": "104215955696893244547",
+        "client_email": "ac2-135@pagihub.iam.gserviceaccount.com",
+        "client_id": "110224692483501250114",
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
         "token_uri": "https://oauth2.googleapis.com/token",
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ac-100%40pagihub.iam.gserviceaccount.com"
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ac2-135%40pagihub.iam.gserviceaccount.com"
       }
     }
   },
