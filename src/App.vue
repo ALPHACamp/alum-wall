@@ -53,7 +53,7 @@ export default {
           document.querySelector('[data-qa="mobile-modal"]').style.visibility = 'hidden'
         }
         this.$refs.event.action()
-      }, 1000)
+      }, 1500)
     }
   }
 }
