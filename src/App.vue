@@ -21,8 +21,7 @@ export default {
   },
   mounted () {
     console.log('version 1.6.2')
-
-    if (window.location.pathname === '/#wall') {
+    if (window.location.hash === '#wall') {
 
       setTimeout(() => {
         this.$refs.event.getData()
