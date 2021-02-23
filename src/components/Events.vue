@@ -18,15 +18,17 @@
       </div>
 
       <vue-waterfall-easy
+        :key="activeTag"
         ref="waterfall"
         class="cards"
-        :imgsArr="imagesArr"
+        :imgsArr="userData"
         :gap="30"
         :max-cols="4"
         :outer-styles="outerStyles"
         :short-names="shortNames"
         :img-width="300"
         :style="{ zIndex: 100}"
+        @scrollReachBottom="pushData"
       >
         <div
           v-if="currentTag"
@@ -146,18 +148,34 @@ export default {
   },
   data () {
     return {
+      page: 0,
       isSafari: /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
       tl: null,
       tl2: null,
       scene: 1,
       hoverTag: null,
       activeTag: 'ALL',
+      rawArray: [],
       userData: []
+    }
+  },
+  watch: {
+    currentTag() {
+      if (this.activeTag === 'ALL') {
+        this.userData = this.rawArray
+      } else {
+        this.userData = this.rawArray.filter(user => {
+          return user[5].includes(this.activeTag)
+        })
+      }
+      setTimeout(() => {
+        this.$refs.waterfall.loaded = true
+      }, 2000)
     }
   },
   computed: {
     shortNames() {
-      return this.imagesArr.map(user => {
+      return this.userData.map(user => {
         let name = user[0]
         if (name[0].toString().match(/[\u3400-\u9FBF]/)) {
           return name[0]
@@ -169,7 +187,7 @@ export default {
       })
     },
     outerStyles () {
-      const array = this.imagesArr.map(user => {
+      const array = this.userData.map(user => {
         const klass = this.tagsData[user[5]]
         let color = klass ? this.tagsData[user[5]].color : '#F9E7C0'
 
@@ -180,23 +198,6 @@ export default {
         }
       })
       return array
-    },
-    imagesArr () {
-      return this.userData
-                 .filter(user => {
-                   if (this.activeTag === 'ALL') {
-                     return true
-                   } else {
-                     return user[5].includes(this.activeTag)
-                   }
-                 }).map(user => {
-          const result = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.exec(user[2])
-          return {
-            ...user,
-            src: result ? result[0] : '',
-            href: result ? result[0] : ''
-          }
-        })
     },
     currentTag () {
       return this.tagsData[this.activeTag]
@@ -276,6 +277,20 @@ export default {
     }
   },
   methods: {
+    pushData() {
+      const data = this.rawArray.slice(this.page * 10, (this.page + 1) * 10).filter(user => {
+        if (this.activeTag === 'ALL') {
+          return true
+        } else {
+          return user[5].includes(this.activeTag)
+        }
+      })
+      this.userData.push(...data)
+      this.page++
+      if (this.rawArray.length === this.userData.length) {
+        this.$refs.waterfall.loaded = true
+      }
+    },
     hexToRgb (hex, opacity = 0.3) {
       const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
       hex = hex.replace(shorthandRegex, function (m, r, g, b) {
@@ -299,12 +314,16 @@ export default {
       const rows = await sheet.getRows()
 
       for (let row of rows) {
-        this.userData.push(row._rawData)
+        const user = row._rawData
+        const result = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.exec(user[2])
+        this.rawArray.push({
+          ...user,
+          src: result ? result[0] : '',
+          href: result ? result[0] : ''
+        })
       }
 
-      setTimeout(() => {
-        this.$refs.waterfall.loaded = true
-      }, 3000)
+      this.pushData()
     },
     openLink (link) {
       const win = window.open(link, '_blank')

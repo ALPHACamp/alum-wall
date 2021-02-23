@@ -127,6 +127,7 @@
     .vue-waterfall-easy(:style="isMobile? '' :{width: colWidth*cols+'px',left:'50%', marginLeft: -1*colWidth*cols/2 +'px'}")
       .img-box(
         v-for="(v,i) in imgsArr_c",
+        :key="i"
         :class="[cardAnimationClass, {__err__: v._error}]"
         :style="{padding: (isMobile ? mobileGap : gap)/2+'px', width: isMobile ? '' : colWidth+'px'}"
       )
