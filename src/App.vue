@@ -61,7 +61,7 @@ export default {
       setTimeout(() => {
         this.response_id = event.response_id
         if (document.querySelector('[data-qa="mobile-modal"]')) {
-          document.querySelector('[data-qa="mobile-modal"]').style.visibility = 'hidden'
+          document.querySelector('[data-qa="mobile-modal"]').style.maxHeight = 0
         }
 
         this.$refs.event.getData()
