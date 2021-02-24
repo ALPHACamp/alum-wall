@@ -287,6 +287,7 @@ export default {
   },
   methods: {
     pushData() {
+      if (this.page >= this.rawArray.length / 10) return
       const data = this.rawArray.slice(this.page * 10, (this.page + 1) * 10).filter(user => {
         if (this.activeTag === 'ALL') {
           return true
