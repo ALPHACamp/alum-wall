@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="overflow: hidden">
     <div class="wall">
       <logo class="logo" />
 
@@ -392,7 +392,7 @@ export default {
     width: 100vw;
 
     height: 100vh;
-    height: calc(100vh - var(--vh-offset, 0px));
+    //height: calc(100vh - var(--vh-offset, 0px));
     background-size: cover !important;
     background-position: center !important;
   }
@@ -505,7 +505,7 @@ export default {
       margin-top: 50px;
     }
     .cards {
-      padding-bottom: 50px;
+      padding-bottom: 5px;
     }
   }
   .card {
