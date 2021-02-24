@@ -11,16 +11,6 @@ const ROOT_PATH = 'https://alum.alphacamp.co/'
 
 export default {
   name: 'app',
-  metaInfo () {
-    return {
-      meta: [
-        // Facebook OpenGraph
-        { property: 'og:title', content: 'ALPHA Camp 校友 2021年春酒' },
-        { property: 'og:image', content: this.og_image },
-        { property: 'og:description', content: '懷念在 AC bootcamp 一起學習的校友們嗎？填寫校友表單與歷屆校友們串連吧！' }
-      ]
-    }
-  },
   components: {
     Events
   },
