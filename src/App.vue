@@ -34,8 +34,8 @@ export default {
   mounted () {
     console.log('version 1.6.2')
     if (window.location.hash === '#wall') {
+      this.$refs.event.getData()
       setTimeout(() => {
-        this.$refs.event.getData()
         this.response_id = 123
         const image = new Image()
         image.onload = () => {
@@ -80,6 +80,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   height: 100vh;
+  height: calc(100vh - var(--vh-offset, 0px));
   width: 100vw;
   background: #2F3035;
 }

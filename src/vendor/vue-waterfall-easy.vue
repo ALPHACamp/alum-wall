@@ -230,6 +230,9 @@ export default {
       type: Boolean,
       default: false
     },
+    animatePromise: {
+      type: Promise
+    }
   },
   data () {
     return {
@@ -268,7 +271,8 @@ export default {
 
     this.preload()
     this.cols = this.calcuCols()
-    this.$on('preloaded', () => {
+    this.$on('preloaded', async () => {
+      await this.animatePromise
       this.isFirstLoad = false
 
       this.imgsArr_c = this.imgsArr.concat([]) // 预加载完成，这时才开始渲染
@@ -378,7 +382,7 @@ export default {
         //   duration: this.firstTime ? 0 : 0.3,
         //   ease: 'none'
         // })
-        // this.imgBoxEls[i].style.transform = `translate(${left}px, ${top}px)`
+        // gsap.to(this.imgBoxEls[i], { x: left, y: top })
         this.imgBoxEls[i].style.left = left + 'px'
         this.imgBoxEls[i].style.top = top + 'px'
       }

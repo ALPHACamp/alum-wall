@@ -14,6 +14,7 @@
     "google-spreadsheet": "^3.1.15",
     "gsap": "^3.6.0",
     "normalize.css": "^8.0.1",
+    "vh-check": "^2.0.5",
     "vue": "^2.6.10",
     "vue-meta": "^2.4.0",
     "vue-waterfall-easy": "^2.4.4"

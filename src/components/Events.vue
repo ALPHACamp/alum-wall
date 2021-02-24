@@ -27,6 +27,8 @@
         :outer-styles="outerStyles"
         :short-names="shortNames"
         :img-width="300"
+        :animate-promise="animatePromise"
+        :reach-bottom-distance="400"
         :style="{ zIndex: 100}"
         @scrollReachBottom="pushData"
       >
@@ -156,8 +158,15 @@ export default {
       hoverTag: null,
       activeTag: 'ALL',
       rawArray: [],
-      userData: []
+      userData: [],
+      resolve: null,
+      animatePromise: null
     }
+  },
+  created() {
+    this.animatePromise = new Promise((resolve) => {
+      this.resolve = resolve
+    })
   },
   watch: {
     currentTag() {
@@ -352,6 +361,7 @@ export default {
             }, 0.5)
             .eventCallback('onComplete', () => {
               this.scene = 2
+              this.resolve()
             })
             .to('.event', { xPercent: -100 , duration: 0.8, ease: 'ease.outIn' }, 2)
             // .from('.wall', { xPercent: -100 , duration: 0.8, ease: 'ease.out' }, 2)
@@ -380,7 +390,9 @@ export default {
   .bgc-image {
     position: fixed;
     width: 100vw;
+
     height: 100vh;
+    height: calc(100vh - var(--vh-offset, 0px));
     background-size: cover !important;
     background-position: center !important;
   }
