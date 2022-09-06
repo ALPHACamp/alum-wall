@@ -61,21 +61,21 @@
                   v-if="props.value[1]"
                   svg-inline
                   :style="{ fill: outerStyles[props.index].color }"
-                  src="svgs/email.svg"
+                  src="/2021/svgs/email.svg"
                   @click="openLink(`mailto:${props.value[1]}`)"
                 >
                 <img
                   v-if="props.value[9]"
                   svg-inline
                   :style="{ fill: outerStyles[props.index].color }"
-                  src="svgs/facebook.svg"
+                  src="/2021/svgs/facebook.svg"
                   @click="openLink(props.value[9])"
                 >
                 <img
                   v-if="props.value[10]"
                   svg-inline
                   :style="{ fill: outerStyles[props.index].color }"
-                  src="svgs/linkdin.svg"
+                  src="/2021/svgs/linkdin.svg"
                   @click="openLink(props.value[10])"
                 >
               </div>
@@ -98,7 +98,7 @@
       <div
         id="background1"
         class="bgc-image"
-        :style="{ background: `url(${require('images/1.jpg')})` }"
+        :style="{ background: `url(${require('/2021/images/1.jpg')})` }"
       />
       <div
         id="animate3"
@@ -113,7 +113,7 @@
           id="logo-icon1"
           class="logo-icon"
           svg-inline
-          src="svgs/logo.svg"
+          src="/2021/svgs/logo.svg"
         >
         <h1 id="logo-text1" class="logo-text" :style="color">
           Alumni

@@ -7,7 +7,7 @@
 
 <script>
 import Events from './components/Events'
-const ROOT_PATH = 'https://alum.alphacamp.co/'
+const ROOT_PATH = 'https://alum.alphacamp.co/2021/'
 
 export default {
   name: 'app',
@@ -18,7 +18,7 @@ export default {
     return {
       response_id: null,
       loaded: false,
-      og_image: ROOT_PATH + require('images/alumi.png')
+      og_image: ROOT_PATH + require('/2021/images/alumi.png')
     }
   },
   mounted () {
@@ -32,7 +32,7 @@ export default {
           this.$refs.event.action()
           this.loaded = true
         }
-        image.src = require('images/1.jpg')
+        image.src = require('/2021/images/1.jpg')
       }, 500)
     } else {
       window.addEventListener('DOMContentLoaded', () => {

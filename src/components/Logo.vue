@@ -6,7 +6,7 @@
       }">
     <img
       svg-inline
-      src="svgs/logo.svg"
+      src="/2021/svgs/logo.svg"
     >
     <h1>
       Alumni

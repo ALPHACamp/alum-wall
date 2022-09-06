@@ -1,17 +1,18 @@
 const path = require('path')
 
 module.exports = {
+  publicPath: '/2021/',
   devServer: {
-    https: true
+    https: false
   },
   css: {
     extract: false
   },
   chainWebpack: config => {
     config.resolve.alias
-      .set('icons', path.resolve(__dirname, 'src/assets/icons'))
-      .set('images', path.resolve(__dirname, 'src/assets/images'))
-      .set('svgs', path.resolve(__dirname, 'src/assets/svgs'))
+      .set('/2021/icons', path.resolve(__dirname, 'src/assets/icons'))
+      .set('/2021/images', path.resolve(__dirname, 'src/assets/images'))
+      .set('/2021/svgs', path.resolve(__dirname, 'src/assets/svgs'))
 
     config.module
       .rule('vue')
